@@ -1,6 +1,7 @@
 use crate::*;
 use core::{
     borrow::{Borrow, BorrowMut},
+    iter::Sum,
     ops::{Index, IndexMut},
 };
 
@@ -21,3 +22,15 @@ pub trait ArrayLike<T>:
 {
 }
 impl<T, const N: usize> ArrayLike<T> for [T; N] where T: PixelComponent {}
+
+pub trait HomPixelSuper<T>:
+    HetPixel<ColorComponent = T, AlphaComponent = T> + IntoIterator<Item = T>
+{
+}
+impl<M, T> HomPixelSuper<T> for M where
+    M: HetPixel<ColorComponent = T, AlphaComponent = T> + IntoIterator<Item = T>
+{
+}
+
+pub trait HetPixelSuper<T, A>: Copy + Default {}
+impl<M, T, A> HetPixelSuper<T, A> for M where M: Copy + Default {}

@@ -18,7 +18,7 @@ pub use formats::rgb::Rgb;
 pub use formats::rgba::Rgba;
 
 pub use pixel::{
-    arraylike::ArrayLike,
+    meta_traits::{ArrayLike, HomPixelSuper, HetPixelSuper},
     gain_alpha::{GainAlpha, LoseAlpha},
     has_alpha::HasAlpha,
     het_pixel::{HetPixel, TryFromColorsAlphaError},
