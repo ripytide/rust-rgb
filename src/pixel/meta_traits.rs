@@ -1,9 +1,14 @@
+use num_traits::{NumAssignRef, NumRef};
+
 use crate::*;
 use core::{
     borrow::{Borrow, BorrowMut},
     iter::Sum,
     ops::{Index, IndexMut},
 };
+
+pub trait MathTraits: Copy + PartialOrd + Default + Sum + NumRef + NumAssignRef {}
+impl<T> MathTraits for T where T: Copy + PartialOrd + Default + Sum + NumRef + NumAssignRef {}
 
 /// A trait used when returning arrays from the two pixel traits due to the lack of the const
 /// generic expression feature on stable rust.
@@ -32,5 +37,5 @@ impl<M, T> HomPixelSuper<T> for M where
 {
 }
 
-pub trait HetPixelSuper<T, A>: Copy + Default {}
+pub trait HetPixelSuper<T, A>: Copy {}
 impl<M, T, A> HetPixelSuper<T, A> for M where M: Copy + Default {}
